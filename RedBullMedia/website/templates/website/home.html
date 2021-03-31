@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Media</title>
+  <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
+  <link rel="stylesheet" href="static/website/style.css">
+</head>
+
+<body>
+  <div name="title" class="titleHolder">
+    <p class="titleText"> Title:</p>
+    <p class="titleContentText">{{title}} </p>
+  </div>
+
+  {% if mediaType == "video" %}
+  <div name="content">
+    <video id="my-video" class="video-js left" controls preload="auto" width="640" height="420" poster={{previewUrl}}
+      data-setup="{}">
+      <source src={{contentUrl}} type="video/mp4" />
+      <source src={{contentUrl}} type="video/webm" />
+
+      <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a
+        web browser that
+        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+      </p>
+    </video>
+
+  </div>
+
+  {% else %}
+  <div name="image">
+    <img class="imageSize" src={{contentUrl}} />
+  </div>
+
+
+  {% endif %}
+
+  {% autoescape off %}
+  <div name="description" class="descriptionHolder">
+    <p class="titleText"> Description:</p>
+    {% if mediaType == "video" %}
+    <p class="descriptionText"> {{description}}</p>
+    {% else  %}
+    <p class="descriptionText"> Not Available!</p>
+    {% endif %}
+  </div>
+  {% endautoescape %}
+
+</body>
+
+</html>
