@@ -1,60 +1,178 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Media List</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.82.0">
   <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
   <link rel="stylesheet" href="static/website/style.css">
+  <link rel="stylesheet" href="static/website/bootstrap.css">
+  <link rel="stylesheet" href="static/website/bootstrap.css.map">
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
+  <script src="static/website/bootstrap.bundle.min.js"></script>
+
+  <link href="static/website/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+
 </head>
 
 <body>
 
-  {% for item in content %}
+  <header>
+    <div class="collapse bg-dark" id="navbarHeader">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-md-7 py-4">
+            <h4 class="text-white">About</h4>
+            <p class="text-muted">This is a Django application using Python, the data is coming from a JSON file and allows users to 
+              browse two different media types, Image and Video and short information about the content.
+            </p>
+          </div>
+          <div class="col-sm-4 offset-md-1 py-4">
+            <h4 class="text-white">Contact</h4>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-white">Follow on Twitter</a></li>
+              <li><a href="#" class="text-white">Like on Facebook</a></li>
+              <li><a href="#" class="text-white">Email me</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+      <div class="container">
+        <a href="#" class="navbar-brand d-flex align-items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"
+            viewBox="0 0 24 24">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+            <circle cx="12" cy="13" r="4" />
+          </svg>
+          <strong>Media</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+          aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </div>
+  </header>
 
-  {% if item.mediaType == "video" %}
-  <div name="content">
-    <video id="my-video" class="video-js left" controls preload="auto" width="640" height="420" poster={{item.previewUrl}}
-      data-setup="{}">
-      <source src={{item.contentUrl}} type="video/mp4" />
-      <source src={{item.contentUrl}} type="video/webm" />
+  <main>
 
-      <p class="vjs-no-js">
-        To view this video please enable JavaScript, and consider upgrading to a
-        web browser that
-        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">Red Bull Media</h1>
+          <p class="lead text-muted">Enjoy the content provided by this website, and vote for your favorite.</p>
+          <p>
+            <a href="#" class="btn btn-primary my-2">Top Rated</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+      <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          {% for item in content %}
+          <div class="col">
+            <div class="card shadow-sm">
+              <div class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg"
+                role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <rect width="100%" height="100%" fill="#55595c" />
+                {% if item.mediaType == "video" %}
+                <video id="my-video " class="video-js" style="width: -webkit-fill-available;" controls preload="auto"
+                  height="280" poster={{item.previewUrl}} data-setup="{}">
+                  <source src={{item.contentUrl}} type="video/mp4" />
+                  <source src={{item.contentUrl}} type="video/webm" />
+
+                  <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a
+                    web browser that
+                    <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                  </p>
+                </video>
+
+
+                {% else %}
+
+                <img style="width: -webkit-fill-available; display: block; max-height: 280px; min-height: 280px;"
+                  src={{item.contentUrl}} />
+
+
+                {% endif %}
+              </div>
+
+              <div class="card-body textLimit"
+                style="min-height: 140px; max-height: 140px; max-width:387px; position: relative;">
+                {% autoescape off %}
+                <p class="card-text">{{item.source}}</p>
+                {% endautoescape %}
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group" style="position: absolute; bottom: 0; margin-bottom: 10px;">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="pagination justify-content-center " style="margin-top: 20px;">
+        <span class="step-links paginationPosition"></span>
+        {% if content.has_previous %}
+        <a class="page-link" href="?page={{ content.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span class="page-link">
+          Page {{ content.number }} of {{ content.paginator.num_pages }}
+        </span>
+        {% if content.has_next %}
+        <a class="page-link" href="?page={{ content.next_page_number }}">Next</a>
+        {% endif %}
+        </span>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="text-muted py-5">
+    <div class="container">
+      <p class="float-end mb-1">
+        <a href="#">Back to top</a>
       </p>
-    </video>
-
-  </div>
-
-  {% else %}
-  <div name="image">
-    <img class="imageSize" src={{item.contentUrl}} />
-  </div>
+      <p class="mb-1">Test Media App &copy; <a href="https://github.com/radesrdan/MediaApp">Rade Srdanovic</a></p>
+      <p class="mb-0">Visit <a href="https://github.com/radesrdan/MediaApp">GitHub</a> for more info.</p>
+    </div>
+  </footer>
 
 
-  {% endif %}
-
-  {% endfor %}
-
-  <div class="pagination">
-    <span class="step-links">
-      {% if content.has_previous %}
-      <a href="?page=1">&laquo; first</a>
-      <a href="?page={{ pcontent.previous_page_number }}">previous</a>
-      {% endif %}
   
-      <span class="current">
-        Page {{ content.number }} of {{ content.paginator.num_pages }}.
-      </span>
-  
-      {% if content.has_next %}
-      <a href="?page={{ content.next_page_number }}">next</a>
-      <a href="?page={{ content.paginator.num_pages }}">last &raquo;</a>
-      {% endif %}
-    </span>
-  </div>
+
 
 </body>
 

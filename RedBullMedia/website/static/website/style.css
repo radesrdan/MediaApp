@@ -56,3 +56,28 @@ body {
     margin-top: 15px;
     margin-left: 15px;
 }
+
+
+/************************ List View *****************************/
+
+.contentWidth {
+    width: -webkit-fill-available;
+}
+
+.paginationPosition {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.textLimit {
+    width:387px;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.bottomPosition {
+    position: absolute; 
+    bottom: 0;
+}

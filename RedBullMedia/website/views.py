@@ -22,7 +22,7 @@ def ListView(request):
     with open("website/resource/content.json") as f:
         result = json.loads(f.read())
 
-    paginator = Paginator(result, 5)
+    paginator = Paginator(result, 9)
     page_number = request.GET.get('page')
     content = paginator.get_page(page_number)
 

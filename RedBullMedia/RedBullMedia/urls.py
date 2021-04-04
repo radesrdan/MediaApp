@@ -7,6 +7,6 @@ from website.views import MediaContent, ListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', MediaContent),
-    path('list',ListView)
+    path('', ListView),
+    path('detailedView',MediaContent)
 ]
