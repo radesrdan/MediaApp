@@ -8,5 +8,5 @@ from website.views import MediaContent, ListView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', ListView),
-    path('detailedView',MediaContent)
+    path('detail/<int:id>',MediaContent,)
 ]

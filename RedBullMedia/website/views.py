@@ -5,8 +5,8 @@ from django.core.paginator import Paginator
 
 
 
-def MediaContent(request):
-    i=5
+def MediaContent(request,id):
+    i=id
     with open("website/resource/content.json") as f:
         result = json.loads(f.read())
     content = {}
@@ -16,7 +16,8 @@ def MediaContent(request):
     content ['title'] = result[i]["title"]
     if content ['mediaType'] == "video":
         content ['description'] = result[i]["description"]
-    return render(request,"website/home.html",content)
+    return render(request,"website/detail.html",content)
+    
 
 def ListView(request):
     with open("website/resource/content.json") as f:
